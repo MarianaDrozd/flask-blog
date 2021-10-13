@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+
+  web:
+    build: ./docker/python
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mysql
+    links:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: flask-mysql-blog
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./docker/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Uagirl92
+      - MYSQL_DATABASE=flask
+      - MYSQL_USER=flask
+      - MYSQL_PASSWORD=Uagirl92
+    ports:
+      - "8003:3306"

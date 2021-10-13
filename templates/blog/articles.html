@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% include 'blog/shared/head.html' %}
+    <title>Articles</title>
+</head>
+<body>
+{% include 'blog/shared/header.html' %}
+<div class="card-group" >
+  {% for article in articles %}
+        {% include 'blog/shared/article.html' %}
+    {% endfor %}
+</div>
+<a class="btn btn-primary" href="/article/create"  role="button">Add new article</a>
+{% include 'blog/shared/scripts.html' %}
+</body>
+<footer>
+    {% include 'blog/shared/footer.html' %}
+</footer>
+</html>
