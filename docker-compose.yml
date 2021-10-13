@@ -30,7 +30,7 @@ services:
 
   mysql:
     image: mysql:8.0
-    container_name: flask-mysql7
+    container_name: flask-mysql-blog
     working_dir: /application
     volumes:
       - .:/application
