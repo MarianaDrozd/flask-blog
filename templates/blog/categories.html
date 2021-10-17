@@ -8,8 +8,7 @@
 {% include 'blog/shared/header.html' %}
 <div class="list-group" align="center">
     {% for category in categories %}
-        <a href="#" class="list-group-item list-group-item-action active"></a>
-        {{ category.title }}
+        <a class="list-group-item list-group-item-action active">{{ category.title }}</a>
     {% endfor %}
 </div>
 <a class="btn btn-primary" href="/categories/create" role="button">Add new category</a>

@@ -102,14 +102,16 @@ def logout():
 @app.route('/article/<string:slug>')
 def article_details(slug):
     article = Article.query.filter_by(slug=slug).first()
-    return render_template('blog/details.html', article=article)
+    article_categories = [category.title for category in article.categories]
+    return render_template('blog/details.html', article=article, article_categories=article_categories)
 
 
 @app.route('/article/create')
 def article_create():
+    categories = Category.query.all()
     if not session.get('user', False):
         return redirect('/')
-    return render_template('blog/article_create.html')
+    return render_template('blog/article_create.html', categories=categories)
 
 
 @app.route('/contact-us')
@@ -139,6 +141,28 @@ def article_store():
     db.session.add(article)
     db.session.commit()
     return redirect("/")
+
+
+@app.route('/category/store', methods=["POST"])
+def category_store():
+    if not session.get('user', False):
+        return redirect('/')
+    data = request.form
+
+    category = Category(
+        title=data.get('title'),
+    )
+
+    db.session.add(category)
+    db.session.commit()
+    return redirect("/")
+
+
+@app.route('/categories/create')
+def category_create():
+    if not session.get('user', False):
+        return redirect('/')
+    return render_template('blog/category_create.html')
 
 
 @app.route('/categories', methods=["GET"])
